@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Value Swapper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: antiquewhite;
+    }
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Value Swapper</h1>
+    <form id="swapForm">
+      <label for="x">Value X:</label>
+      <input type="number" id="x" name="x" required>
+      <label for="y">Value Y:</label>
+      <input type="number" id="y" name="y" required>
+      <button type="submit">Swap Values</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('swapForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const x = parseInt(document.getElementById('x').value);
+      const y = parseInt(document.getElementById('y').value);
+
+      // Use destructuring assignment to swap values within an array
+      const [swappedX, swappedY] = [y, x];
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `After swapping: X = ${swappedX}, Y = ${swappedY}`;
+    });
+  </script>
+</body>
+</html>

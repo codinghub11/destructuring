@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word Count Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #0d0e0d;
+      background-color: aquamarine;
+    }
+    #container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    #result {
+      border: 1px solid #cda3a3;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Word Count Generator</h1>
+    <textarea id="textInput" rows="6" cols="50" placeholder="Enter your text here"></textarea>
+    <button id="countButton">Count Words</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('countButton').addEventListener('click', function () {
+      const textInput = document.getElementById('textInput').value;
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '';  // Clear previous results
+
+      const words = textInput.split(/\s+/);
+      const wordCountMap = {};
+
+      for (const word of words) {
+        const normalizedWord = word.toLowerCase();
+        if (normalizedWord in wordCountMap) {
+          wordCountMap[normalizedWord] += 1;
+        } else {
+          wordCountMap[normalizedWord] = 1;
+        }
+      }
+
+      for (const word in wordCountMap) {
+        const count = wordCountMap[word];
+        const resultText = `${word}: ${count}`;
+        const resultParagraph = document.createElement('p');
+        resultParagraph.textContent = resultText;
+        resultDiv.appendChild(resultParagraph);
+      }
+    });
+  </script>
+</body>
+</html>

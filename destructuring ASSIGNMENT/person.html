@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Person Info Extractor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(65, 220, 220);
+    }
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    textarea {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      border: 1px solid #980a0a;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Person Info Extractor</h1>
+    <form id="extractForm">
+      <label for="inputPerson">Enter person object:</label>
+      <textarea id="inputPerson" name="inputPerson" rows="4" required></textarea>
+      <button type="submit">Extract Info</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function extractPersonInfo(person) {
+      const { name, address: { street } } = person;
+      return { name, street };
+    }
+
+    document.getElementById('extractForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const inputPerson = JSON.parse(document.getElementById('inputPerson').value);
+
+      const extractedInfo = extractPersonInfo(inputPerson);
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `Extracted Info: <pre>${JSON.stringify(extractedInfo, null, 2)}</pre>`;
+    });
+  </script>
+</body>
+</html>

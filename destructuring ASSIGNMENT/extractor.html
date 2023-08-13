@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Element Extractor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: aqua;
+    }
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #e248c1;
+      color: rgb(243, 241, 236);
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      border: 1px solid #121111;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Element Extractor</h1>
+    <form id="extractForm">
+      <label for="inputArray">Enter an array of numbers:</label>
+      <input type="text" id="inputArray" name="inputArray" required>
+      <button type="submit">Extract Elements</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function extractElements(arr) {
+      const [first, second, ...rest] = arr;
+      const last = rest.pop();
+      return [first, second, last];
+    }
+
+    document.getElementById('extractForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const inputArray = document.getElementById('inputArray').value
+        .split(',')
+        .map(str => parseInt(str.trim()));
+
+      const extractedElements = extractElements(inputArray);
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `Extracted elements: ${extractedElements.join(', ')}`;
+    });
+  </script>
+</body>
+</html>

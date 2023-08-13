@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Max and Min Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(241, 118, 196);
+    }
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Max and Min Finder</h1>
+    <form id="findForm">
+      <label for="inputArray">Enter an array of numbers:</label>
+      <input type="text" id="inputArray" name="inputArray" required>
+      <button type="submit">Find Max and Min</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function findMaxAndMin(arr) {
+      const max = Math.max(...arr);
+      const min = Math.min(...arr);
+      return { max, min };
+    }
+
+    document.getElementById('findForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const inputArray = document.getElementById('inputArray').value
+        .split(',')
+        .map(str => parseFloat(str.trim()));
+
+      const result = findMaxAndMin(inputArray);
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `Max: ${result.max}, Min: ${result.min}`;
+    });
+  </script>
+</body>
+</html>
+
+
